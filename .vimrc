@@ -4,9 +4,10 @@ filetype off
 
 if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle'))
+  " call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Align'
@@ -37,7 +38,7 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimshell'
+" NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/unite-help'
 NeoBundle 'Shougo/unite-session'
 NeoBundle 'hakobe/unite-script'
@@ -90,6 +91,8 @@ NeoBundle 'ujihisa/ref-hoogle'
 NeoBundle 'gtags.vim'
 " NeoBundle '5t111111/alt-gtags.vim'
 NeoBundle "hewes/unite-gtags"
+
+call neobundle#end()
 
 filetype plugin indent on
 NeoBundleCheck
@@ -610,7 +613,7 @@ nnoremap ]v :VimFilerBufferDir -split -simple -winwidth=30 -no-quit<CR>
 
 "http://hrsh7th.hatenablog.com/entry/20120229/1330525683
 autocmd! FileType vimfiler call g:my_vimfiler_settings()
-function! g:my_vimfiler_settings()
+function! s:my_vimfiler_settings()
 	nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
 	nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<Cr>
 	nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<Cr>
@@ -890,7 +893,7 @@ let g:rainbow_conf = {
     \       'stylus': 0,
     \   }
     \}
-"(((((((()))))))){{{}}}
+" (((((((()))))))){{{}}}
 
 "javascript
 let $JS_CMD='node'
