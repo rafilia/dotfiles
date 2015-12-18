@@ -7,7 +7,7 @@ if has('vim_starting')
   " call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
-call neobundle#begin(expand('~/.vim/bundle'))
+call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Align'
@@ -38,7 +38,7 @@ NeoBundle 'Shougo/neomru.vim'
 NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
-NeoBundle 'Shougo/vimshell'
+" NeoBundle 'Shougo/vimshell'
 NeoBundle 'Shougo/vinarise'
 NeoBundle 'Shougo/unite-help'
 NeoBundle 'Shougo/unite-session'
@@ -555,7 +555,6 @@ endif
 
 " imap <C-k> <Plug>(neocomplcache_snippets_expand)
 " smap <C-k> <Plug>(neocomplcache_snippets_expand)
-
 "unite.vim
 " 入力モードで開始
 "let g:unite_enable_start_insert=1
@@ -612,8 +611,18 @@ au FileType unite inoremap <silent> <buffer> <ESC><ESC> <ESC>:q<CR>
 
 " unite-gtags
 let g:unite_source_gtags_project_config = {
-			\ '_' : { 'treelize':1, 'absolute_path':1}
+			\ '_' : { 'treelize':1, 'absolute_path':1,
+			\        'gtags_libpath': ['/usr/local/bin/']}
 			\	}
+" let g:unite_source_gtags_ref_option = 'r'
+" let g:unite_source_gtags_def_option = ''
+" let g:unite_source_gtags_result_option = 'ctags-x'
+" let g:unite_source_gtags_project_config = {
+" 			\ '_': {
+" 			\       'gtags_libpath': ['/usr/local/bin/']
+" 			\      }
+"
+" 			\	}
 
 "vimfiler
 nnoremap ,vf :VimFiler<CR>
@@ -622,10 +631,9 @@ let g:vimfiler_safe_mode_by_default=0
 nnoremap ]v :VimFilerBufferDir -split -simple -winwidth=30 -no-quit<CR>
 
 "http://hrsh7th.hatenablog.com/entry/20120229/1330525683
-autocmd! FileType vimfiler call g:my_vimfiler_settings()
-" function! g:my_vimfiler_settings()
+autocmd! FileType vimfiler call s:my_vimfiler_settings()
 function! s:my_vimfiler_settings()
-	nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
+	nmap     <buffer><expr><CR> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
 	nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<Cr>
 	nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<Cr>
 endfunction
@@ -904,7 +912,7 @@ let g:rainbow_conf = {
     \       'stylus': 0,
     \   }
     \}
-"(((((((()))))))){{{}}}
+" (((((((()))))))){{{}}}
 
 "javascript
 let $JS_CMD='node'
@@ -1017,7 +1025,6 @@ set formatoptions+=mM
 ""calender
 nnoremap ]cc :Calendar<CR>
 nnoremap ]ca :Calc<CR>
-
 
 "" ハイライト確認
 function! s:get_syn_id(transparent)
