@@ -4,9 +4,10 @@ filetype off
 
 if has('vim_starting')
   set rtp+=~/.vim/bundle/neobundle.vim/
-  call neobundle#rc(expand('~/.vim/bundle'))
+  " call neobundle#rc(expand('~/.vim/bundle'))
 endif
 
+call neobundle#begin(expand('~/.vim/bundle'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
 NeoBundle 'Align'
@@ -38,6 +39,7 @@ NeoBundle 'Shougo/unite.vim'
 NeoBundle 'Shougo/vimfiler'
 NeoBundle 'Shougo/vimproc'
 NeoBundle 'Shougo/vimshell'
+NeoBundle 'Shougo/vinarise'
 NeoBundle 'Shougo/unite-help'
 NeoBundle 'Shougo/unite-session'
 NeoBundle 'hakobe/unite-script'
@@ -89,7 +91,15 @@ NeoBundle 'ujihisa/ref-hoogle'
 
 NeoBundle 'gtags.vim'
 " NeoBundle '5t111111/alt-gtags.vim'
-NeoBundle "hewes/unite-gtags"
+NeoBundle 'hewes/unite-gtags'
+
+NeoBundle 'fatih/vim-go'
+NeoBundle 'rust-lang/rust.vim'
+
+NeoBundle 'kannokanno/previm'
+NeoBundle 'tyru/open-browser.vim'
+
+call neobundle#end()
 
 filetype plugin indent on
 NeoBundleCheck
@@ -298,6 +308,9 @@ cnoremap <C-A> <HOME>
 cnoremap <C-E> <End>
 cnoremap <C-B> <Left>
 cnoremap <C-F> <Right>
+
+" overwrite with sudo
+cnoremap w!! w !sudo tee %
 
 "メタキーを作動
 if exists('+macmeta')
@@ -559,7 +572,7 @@ nnoremap sj :<C-u>Unite -winheight=15 -no-quit jump<CR>
 nnoremap sd :<C-u>UniteClose default<CR>
 nnoremap sr :<C-u>UniteResume<CR>
 nnoremap st :<C-u>Unite tag -start-insert<CR>
-nnoremap sG :<C-u>Unite gtags/ref -no-quit<CR>
+nnoremap sG :<C-u>Unite gtags/context -no-quit -winwidth=10<CR>
 " nnoremap sp :<C-u>call <SID>unite_project('-start-insert')<CR>
 nnoremap sp :<C-u>UniteWithProjectDir file_rec<CR>
 nnoremap mm :<C-u>Unite mark<CR>
@@ -610,7 +623,8 @@ nnoremap ]v :VimFilerBufferDir -split -simple -winwidth=30 -no-quit<CR>
 
 "http://hrsh7th.hatenablog.com/entry/20120229/1330525683
 autocmd! FileType vimfiler call g:my_vimfiler_settings()
-function! g:my_vimfiler_settings()
+" function! g:my_vimfiler_settings()
+function! s:my_vimfiler_settings()
 	nmap     <buffer><expr><Cr> vimfiler#smart_cursor_map("\<Plug>(vimfiler_expand_tree)", "\<Plug>(vimfiler_edit_file)")
 	nnoremap <buffer>s          :call vimfiler#mappings#do_action('my_split')<Cr>
 	nnoremap <buffer>v          :call vimfiler#mappings#do_action('my_vsplit')<Cr>
@@ -1043,3 +1057,11 @@ function! s:get_syn_info()
         \ " guibg: " . linkedSyn.guibg
 endfunction
 command! SyntaxInfo call s:get_syn_info()
+
+" go
+set rtp+=$GOROOT/misc/vim
+exe "set rtp+=".globpath($GOPATH, "src/github.com/nsf/gocode/vim")
+set completeopt=menu,preview
+
+" previm
+let g:previm_open_cmd = 'open -a Google\ Chrome'
