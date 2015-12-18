@@ -92,6 +92,16 @@ NeoBundle 'gtags.vim'
 " NeoBundle '5t111111/alt-gtags.vim'
 NeoBundle "hewes/unite-gtags"
 
+" let g:unite_source_gtags_ref_option = 'r'
+" let g:unite_source_gtags_def_option = ''
+" let g:unite_source_gtags_result_option = 'ctags-x'
+"
+let g:unite_source_gtags_project_config = {
+			\ '_': {
+			\       'gtags_libpath': ['/usr/local/bin/']
+			\      }
+			\	}
+
 call neobundle#end()
 
 filetype plugin indent on
@@ -1006,7 +1016,6 @@ set formatoptions+=mM
 ""calender
 nnoremap ]cc :Calendar<CR>
 nnoremap ]ca :Calc<CR>
-
 
 "" ハイライト確認
 function! s:get_syn_id(transparent)
