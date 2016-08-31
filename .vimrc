@@ -1,111 +1,48 @@
 "load plugin
-set nocompatible
-filetype off
-
-if has('vim_starting')
-  set rtp+=~/.vim/bundle/neobundle.vim/
-  " call neobundle#rc(expand('~/.vim/bundle'))
+if &compatible
+	set nocompatible
 endif
+set runtimepath^=~/.vim/dein.vim/repos/github.com/Shougo/dein.vim
 
-call neobundle#begin(expand('~/.vim/bundle/'))
-NeoBundleFetch 'Shougo/neobundle.vim'
+call dein#begin(expand('~/.vim/dein'))
 
-NeoBundle 'Align'
-NeoBundle 'DrawIt'
-NeoBundle 'YankRing.vim'
-NeoBundle 'ZoomWin'
-NeoBundle 'errormarker.vim'
-NeoBundle 'gregsexton/VimCalc'
-" NeoBundle 'number-marks'
-" NeoBundle 'showmarks'
-NeoBundle 'smartchr'
-NeoBundle 'tagexplorer.vim'
-NeoBundle 'Markdown'
-NeoBundle 'taglist.vim'
-NeoBundle 'Solarized'
-NeoBundle 'verilog.vim'
-NeoBundle 'verilog_systemverilog.vim'
-" NeoBundle 'Rainbow-Parentheses-Improved'
-NeoBundle 'luochen1990/rainbow'
+call dein#add('Shougo/dein.vim')
+call dein#add('Shougo/vimproc.vim', {'build': 'make'})
+call dein#add('Shougo/neocomplete.vim')
+call dein#add('Shougo/vimfiler')
+call dein#add('Shougo/vimproc')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
 
+call dein#add('Shougo/unite.vim')
+call dein#add('Shougo/unite-session')
+call dein#add('Shougo/unite-outline')
+call dein#add('Shougo/neomru.vim')
+call dein#add('ujihisa/unite-colorscheme')
+call dein#add('ujihisa/unite-font')
+call dein#add('tsukkee/unite-tag')
+call dein#add('hewes/unite-gtags')
 
-NeoBundle has('lua') ? 'Shougo/neocomplete' : 'Shougo/neocomplcache'
-" NeoBundle 'Shougo/neocomplcache' 
-" NeoBundle 'Shougo/neocomplete' 
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-NeoBundle 'Shougo/neomru.vim'
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/vimfiler'
-NeoBundle 'Shougo/vimproc'
-" NeoBundle 'Shougo/vimshell'
-NeoBundle 'Shougo/vinarise'
-NeoBundle 'Shougo/unite-help'
-NeoBundle 'Shougo/unite-session'
-NeoBundle 'hakobe/unite-script'
-" NeoBundle 'h1mesuke/unite-outline'
-NeoBundle 'Shougo/unite-outline'
-NeoBundle 'kana/vim-textobj-indent'
-NeoBundle 'kana/vim-textobj-user'
-NeoBundle 'kana/vim-submode'
-NeoBundle 'mattn/calendar-vim'
-NeoBundle 'mattn/sonictemplate-vim'
-NeoBundle 'taku-o/vim-reorder-columns'
-NeoBundle 'taku-o/vim-toggle'
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'thinca/vim-ref'
-NeoBundle 'thinca/vim-qfreplace'
-NeoBundle 'tomtom/tcomment_vim'
-NeoBundle 'tpope/vim-speeddating'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'tpope/vim-fugitive'
-NeoBundle 'ujihisa/unite-font'
-NeoBundle 'ujihisa/unite-colorscheme'
-NeoBundle 'ujihisa/quicklearn'
-NeoBundle 'tyru/open-browser.vim'
-NeoBundle 'scrooloose/syntastic'
-NeoBundle 'scrooloose/nerdtree'
-NeoBundle 'Lokaltog/vim-easymotion'
-NeoBundle 'tsukkee/unite-tag'
-NeoBundle 'sjl/gundo.vim'
+call dein#add('kana/vim-submode')
+call dein#add('mattn/calendar-vim')
+call dein#add('mattn/sonictemplate-vim')
+call dein#add('taku-o/vim-toggle')
+call dein#add('thinca/vim-quickrun')
+call dein#add('thinca/vim-ref')
+call dein#add('tpope/vim-surround')
+call dein#add('tomtom/tcomment_vim')
+call dein#add('kannokanno/previm')
+call dein#add('tyru/open-browser.vim')
 
-" NeoBundle 'alpaca-tc/alpaca_powertabline'
-" NeoBundle 'Lokaltog/powerline', { 'rtp' : 'powerline/bindings/vim'}
-" NeoBundle 'Lokaltog/powerline-fontpatcher'
-NeoBundle 'itchyny/lightline.vim'
+call dein#add('Align')
+call dein#add('taglist.vim')
+call dein#add('Solarized')
+call dein#add('gtags.vim')
 
-NeoBundle 'wesleyche/SrcExpl'
-NeoBundle 'wesleyche/Trinity'
-NeoBundle 't9md/vim-quickhl'
-NeoBundle 't9md/vim-textmanip'
-NeoBundle 'fuenor/JpFormat.vim'
-" NeoBundle 'fuenor/qfixhowm'
-
-NeoBundle 'tacroe/unite-mark'
-
-"haskell
-NeoBundle 'kana/vim-filetype-haskell'
-NeoBundle 'eagletmt/ghcmod-vim'
-NeoBundle 'ujihisa/neco-ghc'
-NeoBundle 'ujihisa/ref-hoogle'
-
-NeoBundle 'gtags.vim'
-" NeoBundle '5t111111/alt-gtags.vim'
-NeoBundle 'hewes/unite-gtags'
-
-NeoBundle 'fatih/vim-go'
-NeoBundle 'rust-lang/rust.vim'
-
-NeoBundle 'kannokanno/previm'
-NeoBundle 'tyru/open-browser.vim'
-
-call neobundle#end()
-
-filetype plugin indent on
-NeoBundleCheck
-
-"set tags=tags
-"nnoremap ,bi :BundleInstall<CR>
+call dein#add('luochen1990/rainbow')
+call dein#add('itchyny/lightline.vim')
+call dein#add('verilog.vim')
+call dein#add('verilog_systemverilog.vim')
 
 nnoremap ,<space> :e ~/.vimrc<CR> 
 nnoremap ,<space> :e ~/.vimrc<CR> 
@@ -509,7 +446,7 @@ endif
 " let g:neocomplcache_omni_patterns.c = '\%(\.\|->\)\h\w*'
 " let g:neocomplcache_omni_patterns.cpp = '\h\w*\%(\.\|->\)\h\w*\|\h\w*::'
 
-if neobundle#is_installed('neocomplete')
+" if neobundle#is_installed('neocomplete')
     " neocomplete用設定
     let g:neocomplete#enable_at_startup = 1
     let g:neocomplete#enable_ignore_case = 1
@@ -518,18 +455,18 @@ if neobundle#is_installed('neocomplete')
         let g:neocomplete#keyword_patterns = {}
     endif
     let g:neocomplete#keyword_patterns._ = '\h\w*'
-elseif neobundle#is_installed('neocomplcache')
-    " neocomplcache用設定
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_ignore_case = 1
-    let g:neocomplcache_enable_smart_case = 1
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_underbar_completion = 1
-endif
+" elseif neobundle#is_installed('neocomplcache')
+"     " neocomplcache用設定
+"     let g:neocomplcache_enable_at_startup = 1
+"     let g:neocomplcache_enable_ignore_case = 1
+"     let g:neocomplcache_enable_smart_case = 1
+"     if !exists('g:neocomplcache_keyword_patterns')
+"         let g:neocomplcache_keyword_patterns = {}
+"     endif
+"     let g:neocomplcache_keyword_patterns._ = '\h\w*'
+"     let g:neocomplcache_enable_camel_case_completion = 1
+"     let g:neocomplcache_enable_underbar_completion = 1
+" endif
 inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 
